@@ -1,2 +1,2 @@
-# robos
+# Robôs
 Uns robôs pro Robocode.
