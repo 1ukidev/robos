@@ -1,4 +1,4 @@
-package lukidev;
+package lst;
 
 import robocode.*;
 import java.awt.Color;

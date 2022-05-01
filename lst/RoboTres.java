@@ -1,9 +1,9 @@
-package lukidev;
+package lst;
 
 import robocode.*;
 import java.awt.Color;
 
-public class RoboUm extends AdvancedRobot {
+public class RoboTres extends AdvancedRobot {
 	int sentido = 1;
 	boolean avancando;
 
@@ -36,7 +36,7 @@ public class RoboUm extends AdvancedRobot {
 		}
 
 		turnRight(e.getBearing());
-		ahead(e.getDistance() - 250);
+		ahead(e.getDistance() - 350);
 		fire(1);
 		scan();
 	}
