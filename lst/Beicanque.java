@@ -3,8 +3,7 @@ package lst;
 import robocode.*;
 import java.awt.Color;
 
-public class Beicanque extends AdvancedRobot {
-	int sentido = 1;
+public class Beicanque extends TeamRobot {
 	boolean avancando;
 
 	public void run() {
@@ -15,22 +14,19 @@ public class Beicanque extends AdvancedRobot {
 		setRadarColor(Color.blue);
 
 		while (true) {
+			avancando = true;
 			turnRadarRight(360);
 		}
 	}
 
 	// Ao escanear um robô
 	public void onScannedRobot(ScannedRobotEvent e) {
-		if (e.getBearing() >= 0) {
-			sentido = 1;
-		} else {
-			sentido = -1;
-		}
-
-		turnRight(e.getBearing());
-		ahead(e.getDistance() - 100);
-		fire(2);
-		scan();
+		if (isTeammate(e.getName()) == false) {
+			turnRight(e.getBearing());
+			ahead(e.getDistance() - 300);
+			fire(6);
+			scan();
+		} else {}
 	}
 
 	// Função para fazer o robô ir pra direção oposta
@@ -46,27 +42,20 @@ public class Beicanque extends AdvancedRobot {
 
 	// Ao atingir um robô
 	public void onHitRobot(HitRobotEvent e) {
-		if (e.getBearing() >= 0) {
-			sentido = 1;
-		} else {
-			sentido = -1;
-		}
-
-		turnRight(e.getBearing());
-		fire(2);
-		scan();
+		if(isTeammate(e.getName()) == false) {
+			turnRight(e.getBearing());
+			fire(Rules.MAX_BULLET_POWER);
+			scan();
+		} else {}
 	}
 
 	// Ao ser atingido por uma bala
 	public void onHitByBullet(HitByBulletEvent e) {
-		if (e.getBearing() >= 0) {
-			sentido = 1;
-		} else {
-			sentido = -1;
-		}
-
-		turnRight(e.getBearing());
-		fire(2);
+		if(isTeammate(e.getName()) == false) {
+			turnRight(e.getBearing());
+			fire(6);
+			scan();
+		} else {}
 	}
 
 	// Ao bater na parede
